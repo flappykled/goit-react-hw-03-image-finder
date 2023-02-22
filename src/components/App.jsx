@@ -40,7 +40,7 @@ export class App extends React.Component {
     try {
       const fotoObj = await API.addFotoObj(input, this.state.pageNumber);
 
-      // Проверка на первую загрузку галереи
+      
       if (this.state.response.length === 0) {
         this.setState({
           response: fotoObj,
@@ -49,21 +49,21 @@ export class App extends React.Component {
           
         });
 
-        // Если нет результата запроса, покажем уведомление
+        
         if (fotoObj.length === 0) {
           this.setState({
             errorMessage: true,
           });
         }
       }
-      // Добавляем новые обьекты к уже находящимся в State
+      
       else {
         this.setState(prevState => ({
           response: [...prevState.response, ...fotoObj],
           isLoading: false
         }));
       }
-      // Проверка на конец галереи
+  
       if (fotoObj.length === 12) {
         this.setState({
           button: true,
@@ -79,7 +79,6 @@ export class App extends React.Component {
   };
 
   loadMore = () => {
-    // добавляем +1 страницу к запросу
     this.setState(prevState => ({
       pageNumber: prevState.pageNumber + 1,
     }));
